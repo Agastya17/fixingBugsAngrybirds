@@ -78,6 +78,8 @@ function draw(){
     platform.display();
     //log6.display();
     slingshot.display();    
+
+    console.log(bird.body.speed);
 }
 
 function mouseDragged(){
@@ -89,12 +91,14 @@ function mouseDragged(){
 
 function mouseReleased(){
     slingshot.fly();
-    gameState = "launched";
+    //gameState = "launched";
 }
 
 function keyPressed(){
-    if(keyCode === 32){
-       // slingshot.attach(bird.body);
+    if(keyCode === 32 && bird.body.speed < 1 && bird.body.position.x > 1200){     //ASCII
+        bird.trajectory = [];
+        Matter.Body.setPosition(bird.body, {x: 200, y: 50});
+        slingshot.attach(bird.body);
     }
 }
 
@@ -115,3 +119,18 @@ async function getBackgroundImg(){
     backgroundImg = loadImage(bg);
     console.log(backgroundImg);
 }
+
+
+/*
+Most common errors:
+1. typos
+2. Incorrect use of function
+3. Scope
+
+
+Techniques to debug:
+1. Commenting sections of the code
+2. Printing values in the console
+3. Printing messages in the code
+
+*/
